@@ -1,18 +1,18 @@
-//Lets require/import the HTTP module
+//Let's require/import the HTTP module
 var http = require('http'),
   dispatcher = require('httpdispatcher');
 
-//Lets define a port we want to listen to
-const PORT = 8080;
+//Let's define a port we want to listen to
+const PORT=8080;
 
 //We need a function which handles requests and send response
-function handleRequest(request, response) {
+function handleRequest(request, response){
   try {
     //log the request on console
     console.log(request.url);
     //Disptach
     dispatcher.dispatch(request, response);
-  } catch (err) {
+  } catch(err) {
     console.log(err);
   }
 }
@@ -22,13 +22,13 @@ dispatcher.setStatic('resources');
 dispatcher.setStaticDirname(__dirname); //just to tell where is the resourced dir. __dirname is the place where the current file is located.
 
 //A sample GET request
-dispatcher.onGet('/page1', function (req, res) {
+dispatcher.onGet('/page1', function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Page One');
 });
 
 //A sample POST request
-dispatcher.onPost('/post1', function (req, res) {
+dispatcher.onPost('/post1', function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Got Post Data');
 });
@@ -37,8 +37,8 @@ dispatcher.onPost('/post1', function (req, res) {
 //Create a server
 var server = http.createServer(handleRequest);
 
-//Lets start our server
-server.listen(PORT, function () {
+//Let's start our server
+server.listen(PORT, function(){
   //Callback triggered when server is successfully listening. Hurray!
   console.log('Server listening on: http://localhost:%s', PORT);
 });
